@@ -24,10 +24,12 @@ This is a modified fork based on several OSS projects. For more information see 
     <DebugType></DebugType>
     <DefineConstants>TRACE;PORTABLE;RELEASE;NETSTANDARD2_0</DefineConstants>
     <LangVersion>Latest</LangVersion>
+    <OutputPath>Z:\Dropbox\Lib\Projects\voodoo-reports\ref\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>TRACE;PORTABLE;DEBUG;NETSTANDARD2_0</DefineConstants>
     <LangVersion>Latest</LangVersion>
+    <OutputPath>Z:\Dropbox\Lib\Projects\voodoo-reports\ref\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="!internal\" />

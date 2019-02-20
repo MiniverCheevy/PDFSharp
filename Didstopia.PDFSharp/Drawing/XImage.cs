@@ -170,34 +170,27 @@ namespace Didstopia.PDFSharp.Drawing
                 bytes = ms.ToArray();
             }
             bool isJpeg = IsImageJpg(bytes);
-            bytes = null;
-            return new XImage(stream, isJpeg);
+            return new XImage(()=> { return bytes; }, isJpeg);
         }
 
         public static bool IsImageJpg(byte[] bytes)
         {
             var isJpeg = true;
             //https://stackoverflow.com/questions/4550296/how-to-identify-contents-of-a-byte-is-a-jpeg
-            if (bytes != null)
+            if (bytes == null)
+                return isJpeg;
+            var testBytes = new List<byte>();
+            testBytes.AddRange(bytes.Take(2).ToArray());
+            testBytes.AddRange(bytes.Skip(bytes.Length - 2).ToArray());
+            if (testBytes.Count != 4)
+                return isJpeg;
+            var expectedBytes = new string[] { "FF", "D8", "FF", "D9" };
+            var counter = 0;
+            foreach (var b in testBytes)
             {
-                byte one = new byte() { };
-
-                var testBytes = new List<byte>();
-                testBytes.AddRange(bytes.Take(2).ToArray());
-                testBytes.AddRange(bytes.Skip(bytes.Length - 2).ToArray());
-                if (testBytes.Count == 4)
-                {
-
-                    var expectedBytes = new string[] { "FF", "D8", "FF", "D9" };
-                    var counter = 0;
-                    foreach (var b in testBytes)
-                    {
-                        if (b.ToString("X") != expectedBytes[counter])
-                        { isJpeg = false; continue; }
-                        counter++;
-                    }
-                }
-
+                if (b.ToString("X") != expectedBytes[counter])
+                { isJpeg = false; continue; }
+                counter++;
             }
 
             return isJpeg;

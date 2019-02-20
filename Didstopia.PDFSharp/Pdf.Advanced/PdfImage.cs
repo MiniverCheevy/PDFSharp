@@ -796,22 +796,23 @@ namespace Didstopia.PDFSharp.Pdf.Advanced
                 //   { BITMAPINFO }
                 //   BITMAPINFOHEADER
                 // to avoid ReadWord and ReadDWord ... (but w/o pointers this doesn't help much)
-
-                if (ReadWord(imageBits, 0) != 0x4d42 || // "BM"
-                    ReadDWord(imageBits, 2) != streamLength ||
-                    ReadDWord(imageBits, 14) != 40 || // sizeof BITMAPINFOHEADER
-                    ReadDWord(imageBits, 18) != width ||
-                    ReadDWord(imageBits, 22) != height)
-                {
-                    throw new NotImplementedException("ReadTrueColorMemoryBitmap: unsupported format");
-                }
-                if (ReadWord(imageBits, 26) != 1 ||
-                  (!hasAlpha && ReadWord(imageBits, 28) != components * bits ||
-                   hasAlpha && ReadWord(imageBits, 28) != (components + 1) * bits) ||
-                  ReadDWord(imageBits, 30) != 0)
-                {
-                    throw new NotImplementedException("ReadTrueColorMemoryBitmap: unsupported format #2");
-                }
+                //TODO: unravel what the commented code below was supposed to do , the ImageSharpImageSource seems to render images that throw
+                //the unsupported format exceptions fine
+                //if (ReadWord(imageBits, 0) != 0x4d42 || // "BM"
+                //    ReadDWord(imageBits, 2) != streamLength ||
+                //    ReadDWord(imageBits, 14) != 40 || // sizeof BITMAPINFOHEADER
+                //    ReadDWord(imageBits, 18) != width ||
+                //    ReadDWord(imageBits, 22) != height)
+                //{
+                //    throw new NotImplementedException("ReadTrueColorMemoryBitmap: unsupported format");
+                //}
+                //if (ReadWord(imageBits, 26) != 1 ||
+                //  (!hasAlpha && ReadWord(imageBits, 28) != components * bits ||
+                //   hasAlpha && ReadWord(imageBits, 28) != (components + 1) * bits) ||
+                //  ReadDWord(imageBits, 30) != 0)
+                //{
+                //    throw new NotImplementedException("ReadTrueColorMemoryBitmap: unsupported format #2");
+                //}
 
                 int nFileOffset = ReadDWord(imageBits, 10);
                 int logicalComponents = components;

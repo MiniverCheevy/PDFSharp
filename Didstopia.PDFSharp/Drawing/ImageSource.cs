@@ -27,19 +27,19 @@ namespace MigraDocCore.DocumentObjectModel.MigraDoc.DocumentObjectModel.Shapes
         public static IImageSource FromFile(string path, bool isJpeg = true, int? quality = 75)
         {
             try { return ImageSourceImpl.FromFileImpl(path, isJpeg, quality); }
-            catch (Exception) { throw new Exception("Invalid or missing ImageSource implementation (a custom implementation is required)"); }
+            catch (Exception ex) { throw new Exception("Invalid or missing ImageSource implementation (a custom implementation is required)", ex); }
         }
 
         public static IImageSource FromBinary(string name, Func<byte[]> imageSource, bool isJpeg = true, int? quality = 75)
         {
             try { return ImageSourceImpl.FromBinaryImpl(name, imageSource, isJpeg, quality); }
-            catch (Exception) { throw new Exception("Invalid or missing ImageSource implementation (a custom implementation is required)"); }
+            catch (Exception ex) { throw new Exception("Invalid or missing ImageSource implementation (a custom implementation is required)", ex); }
         }
 
         public static IImageSource FromStream(string name, Func<Stream> imageStream, bool isJpeg = true, int? quality = 75)
         {
             try { return ImageSourceImpl.FromStreamImpl(name, imageStream, isJpeg, quality); }
-            catch (Exception) { throw new Exception("Invalid or missing ImageSource implementation (a custom implementation is required)"); }
+            catch (Exception ex) { throw new Exception("Invalid or missing ImageSource implementation (a custom implementation is required)",ex); }
         }
     }
 }
