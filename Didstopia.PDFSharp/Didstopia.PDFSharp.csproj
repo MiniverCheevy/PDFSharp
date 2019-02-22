@@ -10,7 +10,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageLicenseUrl>https://github.com/Didstopia/PDFSharp/blob/master/LICENSE.md</PackageLicenseUrl>
     <Owners>Didstopia</Owners>
-    <PackageProjectUrl>https://github.com/Didstopia/PDFSharp</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/MiniverCheevy/PDFSharp</PackageProjectUrl>
     <Summary>A .NET Standard 2.0 library for reading, writing and editing PDF files.</Summary>
     <PackageTags>pdfsharp pdf extract read edit modify parse dotnet standard 2 2.0 2.1 .net core</PackageTags>
     <Title>PDFSharp for .NET Standard</Title>
@@ -18,6 +18,12 @@
     <Description>A .NET Standard 2.0 library for reading, writing and editing PDF files.
 
 This is a modified fork based on several OSS projects. For more information see the license.</Description>
+<PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>  
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/MiniverCheevy/PDFSharp.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
