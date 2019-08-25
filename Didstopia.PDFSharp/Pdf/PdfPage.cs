@@ -70,6 +70,24 @@ namespace Didstopia.PDFSharp.Pdf
         internal PdfPage(PdfDictionary dict)
             : base(dict)
         {
+            SetOrientation();
+
+        }
+
+        void Initialize()
+        {
+            SetOrientation();
+
+            Size = RegionInfo.CurrentRegion.IsMetric ? PageSize.A4 : PageSize.Letter;
+
+#pragma warning disable 168
+            // Force creation of MediaBox object by invoking property
+            PdfRectangle rect = MediaBox;
+#pragma warning restore 168
+        }
+
+        private void SetOrientation()
+        {
             // Set Orientation depending on /Rotate.
             int rotate = Elements.GetInteger(InheritablePageKeys.Rotate);
             if (Math.Abs((rotate / 90)) % 2 == 1)
@@ -77,16 +95,6 @@ namespace Didstopia.PDFSharp.Pdf
                 _orientation = PageOrientation.Landscape;
                 _orientationSetByCodeForRotatedDocument = true;
             }
-        }
-
-        void Initialize()
-        {
-            Size = RegionInfo.CurrentRegion.IsMetric ? PageSize.A4 : PageSize.Letter;
-
-#pragma warning disable 168
-            // Force creation of MediaBox object by invoking property
-            PdfRectangle rect = MediaBox;
-#pragma warning restore 168
         }
 
         /// <summary>
